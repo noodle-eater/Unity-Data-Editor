@@ -44,16 +44,24 @@ namespace NoodleEater.DataEditor
             for (int i = 0; i < _data.FieldCount; i++)
             {
                 EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.TextField("");
+
+                var field = _data.Fields[i];
+                field.fieldName = EditorGUILayout.TextField(field.fieldName);
+
                 _data.CurrentType = EditorGUILayout.Popup(_data.CurrentType, _data.DataType);
+                field.type = _data.DataType[_data.CurrentType];
+                
+                var value = string.Empty;
                 if (_data.DataType[_data.CurrentType] == "bool")
                 {
                     _data.BoolValue = EditorGUILayout.Popup(_data.BoolValue, _data.BoolData, GUILayout.Width(position.width - 200));
+                    field.value = _data.BoolData.ToString();
                 }
                 else
                 {
-                    EditorGUILayout.TextField("", GUILayout.Width(position.width - 200));
+                    field.value = EditorGUILayout.TextField(field.value, GUILayout.Width(position.width - 200));
                 }
+
                 EditorGUILayout.EndHorizontal();
             }
             EditorGUILayout.EndVertical();
