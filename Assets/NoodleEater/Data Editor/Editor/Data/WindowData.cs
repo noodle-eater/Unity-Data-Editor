@@ -19,14 +19,12 @@ namespace NoodleEater.DataEditor.Data
         public int CurrentType { get => _currentType; set => _currentType = value; }
         public int BoolValue { get => _boolValue; set => _boolValue = value; }
         public int FieldCount { get => _fieldCount; set => _fieldCount = value; }
+        public string ClassName { get; set; }
         public List<FieldValue> Fields { get => _fields; }
 
-        public void Init()
+        public void AddField()
         {
-            for (int i = 0; i < FieldCount; i++)
-            {
-                Fields.Add(new FieldValue());
-            }
+            Fields.Add(new FieldValue());
         }
     }
 }
