@@ -1,9 +1,7 @@
-﻿using NoodleEater.DataEditor.Pattern;
-
-namespace NoodleEater.DataEditor.Data
+﻿namespace NoodleEater.DataEditor.Data
 {
 
-    public class WindowData : BaseSingleton<WindowData>
+    public class WindowData
     {
         private string[] _dataType = new string[] { "int", "float", "bool", "string" };
         private string[] _boolData = new string[] { "true", "false" };

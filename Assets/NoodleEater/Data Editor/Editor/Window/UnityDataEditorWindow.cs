@@ -1,11 +1,15 @@
 ﻿using NoodleEater.DataEditor.Data;
 using UnityEditor;
 using UnityEngine;
+
 namespace NoodleEater.DataEditor
 {
 
     public class UnityDataEditorWindow : EditorWindow
     {
+
+        private WindowData _data = new WindowData();
+        private WindowUIDrawer _drawer = new WindowUIDrawer();
 
         [MenuItem("Unity-Data-Editor/DataWindow")]
 #pragma warning disable IDE0051 // Remove unused private members
@@ -20,41 +24,32 @@ namespace NoodleEater.DataEditor
         private void OnGUI()
         {
             EditorGUILayout.BeginVertical("box");
-            DrawHeader();
+            _drawer.DrawHorizontalLabel("Field", "Type", "Value");
             DrawField();
             EditorGUILayout.EndVertical();
-        }
-
-        private void DrawHeader()
-        {
-            EditorGUILayout.BeginHorizontal();
-            GUILayout.FlexibleSpace();
-            GUILayout.Label("Field");
-            GUILayout.FlexibleSpace();
-            GUILayout.Label("Type");
-            GUILayout.FlexibleSpace();
-            GUILayout.Label("Value");
-            GUILayout.FlexibleSpace();
-            EditorGUILayout.EndHorizontal();
+            _drawer.DrawButton("Add New Field", () => _data.FieldCount++);
+            _drawer.DrawButton("Save", () => Debug.Log("Save"));
         }
 
         private void DrawField()
         {
-            EditorGUILayout.BeginHorizontal();
-            for (int i = 0; i < WindowData.Instance.FieldCount; i++)
+            EditorGUILayout.BeginVertical();
+            for (int i = 0; i < _data.FieldCount; i++)
             {
+                EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.TextField("");
-                WindowData.Instance.CurrentType = EditorGUILayout.Popup(WindowData.Instance.CurrentType, WindowData.Instance.DataType);
-                if (WindowData.Instance.DataType[WindowData.Instance.CurrentType] == "bool")
+                _data.CurrentType = EditorGUILayout.Popup(_data.CurrentType, _data.DataType);
+                if (_data.DataType[_data.CurrentType] == "bool")
                 {
-                    WindowData.Instance.BoolValue = EditorGUILayout.Popup(WindowData.Instance.BoolValue, WindowData.Instance.BoolData, GUILayout.Width(position.width - 200));
+                    _data.BoolValue = EditorGUILayout.Popup(_data.BoolValue, _data.BoolData, GUILayout.Width(position.width - 200));
                 }
                 else
                 {
                     EditorGUILayout.TextField("", GUILayout.Width(position.width - 200));
                 }
+                EditorGUILayout.EndHorizontal();
             }
-            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.EndVertical();
         }
     }
 }
