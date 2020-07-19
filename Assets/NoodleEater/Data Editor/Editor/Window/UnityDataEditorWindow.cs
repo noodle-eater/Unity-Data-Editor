@@ -14,19 +14,19 @@ namespace NoodleEater.DataEditor
         private static void ShowWindow()
         {
             var window = GetWindow<UnityDataEditorWindow>();
-            window.titleContent = new GUIContent("DataWindow");
+            window.titleContent = new GUIContent("Data Editor");
             window.Show();
         }
 
         private void OnEnable()
         {
-            _data.Init();
+            _data.AddField();
         }
 
         private void OnGUI()
         {
             EditorGUILayout.BeginVertical("box");
-            _drawer.DrawHField("Class Name");
+            _data.ClassName = _drawer.DrawHField("Class Name", _data.ClassName);
             _drawer.DrawHorizontalLabel("Field", "Type", "Value");
             DrawField();
             EditorGUILayout.EndVertical();
