@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace NoodleEater.DataEditor.Data
 {
 
     public class WindowData
     {
-        private string[] _dataType = new string[] { "int", "float", "bool", "string" };
+        private string[] _dataType = System.Enum.GetNames(typeof(ValueType));
         private string[] _boolData = new string[] { "true", "false" };
         private int _currentType = 0;
         private int _boolValue = 0;
