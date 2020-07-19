@@ -7,19 +7,21 @@ namespace NoodleEater.DataEditor
 
     public class UnityDataEditorWindow : EditorWindow
     {
-
         private WindowData _data = new WindowData();
         private WindowUIDrawer _drawer = new WindowUIDrawer();
 
         [MenuItem("Unity-Data-Editor/DataWindow")]
-#pragma warning disable IDE0051 // Remove unused private members
         private static void ShowWindow()
         {
             var window = GetWindow<UnityDataEditorWindow>();
             window.titleContent = new GUIContent("DataWindow");
             window.Show();
         }
-#pragma warning restore IDE0051 // Remove unused private members
+
+        private void OnEnable()
+        {
+            _data.Init();
+        }
 
         private void OnGUI()
         {
@@ -27,7 +29,12 @@ namespace NoodleEater.DataEditor
             _drawer.DrawHorizontalLabel("Field", "Type", "Value");
             DrawField();
             EditorGUILayout.EndVertical();
-            _drawer.DrawButton("Add New Field", () => _data.FieldCount++);
+            _drawer.DrawButton("Add New Field", () =>
+            {
+                _data.FieldCount++;
+                _data.Init();
+            });
+            Debug.Log(_data.FieldCount);
             _drawer.DrawButton("Save", () => Debug.Log("Save"));
         }
 
