@@ -40,10 +40,12 @@ namespace NoodleEater.DataEditor
             
             _drawer.DrawButton("Save", () => {
                 Debug.Log("Save");
-                var json = JsonUtility.ToJson(new FieldValueContainer(_data.ClassName, _data.Fields));
+                var container = new FieldValueContainer(_data.ClassName, _data.Fields);
+                var json = JsonUtility.ToJson(container);
                 FileHelper.CreateDirectory(Constant.DATACACHE);
                 FileHelper.CreateFile(Constant.JSONCACHEPATH);
                 FileHelper.WriteText(Constant.JSONCACHEPATH, json);
+                Debug.Log(container.ToJson());
                 Debug.Log(json);
             });
         }
