@@ -1,6 +1,7 @@
-﻿using NoodleEater.DataEditor.Data;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
+using NoodleEater.DataEditor.Data;
+using NoodleEater.DataEditor.Controller;
 
 namespace NoodleEater.DataEditor
 {
@@ -39,9 +40,11 @@ namespace NoodleEater.DataEditor
             
             _drawer.DrawButton("Save", () => {
                 Debug.Log("Save");
-                Debug.Log(_data.Fields.Count);
-                Debug.Log(JsonUtility.ToJson(new FieldValueContainer(_data.Fields)));
-                _data.Fields.ForEach((item) => Debug.Log(item.ToString()));
+                var json = JsonUtility.ToJson(new FieldValueContainer(_data.ClassName, _data.Fields));
+                FileHelper.CreateDirectory(Constant.DATACACHE);
+                FileHelper.CreateFile(Constant.JSONCACHEPATH);
+                FileHelper.WriteText(Constant.JSONCACHEPATH, json);
+                Debug.Log(json);
             });
         }
 
