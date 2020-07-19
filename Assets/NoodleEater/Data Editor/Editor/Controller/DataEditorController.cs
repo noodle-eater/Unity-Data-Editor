@@ -14,7 +14,10 @@ namespace NoodleEater.DataEditor.Controller
             if (!_dataContainer.ContainsKey(fieldName))
             {
                 _dataContainer.Add(fieldName, new FieldValue { type = type, value = value });
-            } else {
+            }
+            else
+            {
+                _dataContainer[fieldName].fieldName = fieldName;
                 _dataContainer[fieldName].type = type;
                 _dataContainer[fieldName].value = value;
             }
