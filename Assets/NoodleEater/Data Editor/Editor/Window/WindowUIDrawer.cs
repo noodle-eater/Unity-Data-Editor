@@ -23,5 +23,17 @@ namespace NoodleEater.DataEditor
                 OnClick?.Invoke();
             }
         }
+
+        public string DrawHField(string label) {
+            string temp = string.Empty;
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            GUILayout.Label(label);
+            GUILayout.FlexibleSpace();
+            temp = EditorGUILayout.TextField(temp);
+            GUILayout.FlexibleSpace();
+            EditorGUILayout.EndHorizontal();
+            return temp;
+        }
     }
 }

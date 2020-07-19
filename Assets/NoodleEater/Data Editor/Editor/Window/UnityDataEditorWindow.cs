@@ -26,9 +26,11 @@ namespace NoodleEater.DataEditor
         private void OnGUI()
         {
             EditorGUILayout.BeginVertical("box");
+            _drawer.DrawHField("Class Name");
             _drawer.DrawHorizontalLabel("Field", "Type", "Value");
             DrawField();
             EditorGUILayout.EndVertical();
+
             _drawer.DrawButton("Add New Field", () =>
             {
                 _data.FieldCount++;
@@ -37,6 +39,7 @@ namespace NoodleEater.DataEditor
             
             _drawer.DrawButton("Save", () => {
                 Debug.Log("Save");
+                Debug.Log(Constant.SCRIPTPATH);
                 _data.Fields.ForEach((item) => Debug.Log(item.ToString()));
             });
         }
@@ -53,21 +56,25 @@ namespace NoodleEater.DataEditor
 
                 _data.CurrentType = EditorGUILayout.Popup(_data.CurrentType, _data.DataType);
                 field.type = _data.DataType[_data.CurrentType];
-                
-                var value = string.Empty;
-                if (_data.DataType[_data.CurrentType] == "bool")
-                {
-                    _data.BoolValue = EditorGUILayout.Popup(_data.BoolValue, _data.BoolData, GUILayout.Width(position.width - 200));
-                    field.value = _data.BoolData.ToString();
-                }
-                else
-                {
-                    field.value = EditorGUILayout.TextField(field.value, GUILayout.Width(position.width - 200));
-                }
+
+                SetValueField(field);
 
                 EditorGUILayout.EndHorizontal();
             }
             EditorGUILayout.EndVertical();
+        }
+
+        private void SetValueField(FieldValue field)
+        {
+            if (_data.DataType[_data.CurrentType] == "bool")
+            {
+                _data.BoolValue = EditorGUILayout.Popup(_data.BoolValue, _data.BoolData, GUILayout.Width(position.width - 200));
+                field.value = _data.BoolData.ToString();
+            }
+            else
+            {
+                field.value = EditorGUILayout.TextField(field.value, GUILayout.Width(position.width - 200));
+            }
         }
     }
 }
