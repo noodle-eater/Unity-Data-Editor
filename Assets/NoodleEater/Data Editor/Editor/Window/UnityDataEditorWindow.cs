@@ -34,8 +34,11 @@ namespace NoodleEater.DataEditor
                 _data.FieldCount++;
                 _data.Init();
             });
-            Debug.Log(_data.FieldCount);
-            _drawer.DrawButton("Save", () => Debug.Log("Save"));
+            
+            _drawer.DrawButton("Save", () => {
+                Debug.Log("Save");
+                _data.Fields.ForEach((item) => Debug.Log(item.ToString()));
+            });
         }
 
         private void DrawField()
