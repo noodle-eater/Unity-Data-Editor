@@ -72,13 +72,24 @@ namespace NoodleEater.DataEditor
         {
             if (field.type == ValueType.Bool)
             {
-                _data.BoolValue = EditorGUILayout.Popup(_data.BoolValue, _data.BoolData, GUILayout.Width(position.width - 200));
-                field.value = _data.BoolData.ToString();
+                field.value = IntToString(EditorGUILayout.Popup(StringToInt(field.value), _data.BoolData, GUILayout.Width(position.width - 200)));
             }
             else
             {
                 field.value = EditorGUILayout.TextField(field.value, GUILayout.Width(position.width - 200));
             }
+        }
+
+        private int StringToInt(string value) {
+            if(string.IsNullOrEmpty(value)) {
+                return 0;
+            } else {
+                return value == "true" ? 1 : 0;
+            }
+        }
+
+        private string IntToString(int value) {
+            return value == 1 ? "true" : "false";
         }
     }
 }
