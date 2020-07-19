@@ -53,10 +53,10 @@ namespace NoodleEater.DataEditor
                 EditorGUILayout.BeginHorizontal();
 
                 var field = _data.Fields[i];
+                
                 field.fieldName = EditorGUILayout.TextField(field.fieldName);
 
-                _data.CurrentType = EditorGUILayout.Popup(_data.CurrentType, _data.DataType);
-                field.type = _data.DataType[_data.CurrentType];
+                field.type = (ValueType) EditorGUILayout.Popup((int)field.type, _data.DataType);
 
                 SetValueField(field);
 
@@ -67,7 +67,7 @@ namespace NoodleEater.DataEditor
 
         private void SetValueField(FieldValue field)
         {
-            if (_data.DataType[_data.CurrentType] == "bool")
+            if (field.type == ValueType.Bool)
             {
                 _data.BoolValue = EditorGUILayout.Popup(_data.BoolValue, _data.BoolData, GUILayout.Width(position.width - 200));
                 field.value = _data.BoolData.ToString();
