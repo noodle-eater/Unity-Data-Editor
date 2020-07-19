@@ -1,0 +1,6 @@
+[System.Serializable]
+public class __CLASS__ {
+
+__FIELD__
+
+}
