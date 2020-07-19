@@ -18,8 +18,8 @@ namespace NoodleEater.DataEditor
             EditorGUILayout.EndHorizontal();
         }
 
-        public void DrawButton(string buttonName, System.Action OnClick) {
-            if(GUILayout.Button(buttonName)) {
+        public void DrawButton(string buttonName, System.Action OnClick, params GUILayoutOption[] options) {
+            if(GUILayout.Button(buttonName, options)) {
                 OnClick?.Invoke();
             }
         }
