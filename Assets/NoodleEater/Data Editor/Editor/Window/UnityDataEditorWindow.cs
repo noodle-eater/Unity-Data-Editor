@@ -34,12 +34,13 @@ namespace NoodleEater.DataEditor
             _drawer.DrawButton("Add New Field", () =>
             {
                 _data.FieldCount++;
-                _data.Init();
+                _data.AddField();
             });
             
             _drawer.DrawButton("Save", () => {
                 Debug.Log("Save");
-                Debug.Log(Constant.SCRIPTPATH);
+                Debug.Log(_data.Fields.Count);
+                Debug.Log(JsonUtility.ToJson(new FieldValueContainer(_data.Fields)));
                 _data.Fields.ForEach((item) => Debug.Log(item.ToString()));
             });
         }
