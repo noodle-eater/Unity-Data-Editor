@@ -10,7 +10,7 @@ namespace NoodleEater.DataEditor
         private WindowData _data = new WindowData();
         private WindowUIDrawer _drawer = new WindowUIDrawer();
 
-        [MenuItem("Unity-Data-Editor/DataWindow")]
+        [MenuItem("Noodle Eater/Data Editor")]
         private static void ShowWindow()
         {
             var window = GetWindow<UnityDataEditorWindow>();
