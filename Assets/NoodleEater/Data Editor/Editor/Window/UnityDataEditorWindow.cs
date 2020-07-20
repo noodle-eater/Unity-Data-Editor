@@ -10,6 +10,7 @@ namespace NoodleEater.DataEditor
     {
         private WindowData _data = new WindowData();
         private WindowUIDrawer _drawer = new WindowUIDrawer();
+        private CodeGeneratorController _generator = new CodeGeneratorController();
 
         [MenuItem("Noodle Eater/Data Editor")]
         private static void ShowWindow()
@@ -42,11 +43,13 @@ namespace NoodleEater.DataEditor
                 Debug.Log("Save");
                 var container = new FieldValueContainer(_data.ClassName, _data.Fields);
                 var json = JsonUtility.ToJson(container);
-                FileHelper.CreateDirectory(Constant.DATACACHE);
-                FileHelper.CreateFile(Constant.JSONCACHEPATH);
-                FileHelper.WriteText(Constant.JSONCACHEPATH, json);
-                Debug.Log(container.ToJson());
+                // Disable Cache System
+                // FileHelper.CreateDirectory(Constant.DATACACHE);
+                // FileHelper.CreateFile(Constant.JSONCACHEPATH);
+                // FileHelper.WriteText(Constant.JSONCACHEPATH, json);
+                // Debug.Log(container.ToJson());
                 Debug.Log(json);
+                _generator.CreateJson(container);
             });
         }
 
