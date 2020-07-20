@@ -6,7 +6,8 @@ namespace NoodleEater.DataEditor.Data {
         public static string SCRIPTPATH = Application.dataPath + "/Scripts/";
         public static string PROJECTHPATH = Application.dataPath.Substring(0, Application.dataPath.Length - 6);
         public static string DATACACHE = PROJECTHPATH + "/Temp/NoodleEater/Data";
-        public static string GENERATEDPATH = SCRIPTPATH + "/Generated/";
+        public static string GENERATEDSCRIPTPATH = SCRIPTPATH + "/Generated/";
+        public static string GENERATEDDATAPATH = Application.dataPath + "/Resources/Generated/";
         public static string TEMPLATEPATH = Application.dataPath + "/NoodleEater/Data Editor/Editor/Template/";
 
         public static string JSONCACHEPATH = DATACACHE + "/cache.json";
