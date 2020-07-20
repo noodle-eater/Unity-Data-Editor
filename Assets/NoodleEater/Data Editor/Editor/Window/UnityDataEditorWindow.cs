@@ -22,6 +22,7 @@ namespace NoodleEater.DataEditor
 
         private void OnEnable()
         {
+            _generator.Init();
             _data.AddField();
         }
 
@@ -50,6 +51,7 @@ namespace NoodleEater.DataEditor
                 // Debug.Log(container.ToJson());
                 Debug.Log(json);
                 _generator.CreateJson(container);
+                _generator.GenerateClass(container);
             });
         }
 
