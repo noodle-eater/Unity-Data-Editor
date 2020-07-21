@@ -18,9 +18,6 @@ namespace NoodleEater.DataEditor.Generator
         public void Init() {
             _classTemplate = File.ReadAllText(Constant.CLASSTEMPLATE);
             _fieldTemplate = File.ReadAllText(Constant.FIELDTEMPLATE);
-
-            Debug.Log(_classTemplate);
-            Debug.Log(_fieldTemplate);
         }
 
         public void GenerateClass(FieldValueContainer container) {
