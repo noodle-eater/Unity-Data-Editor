@@ -39,16 +39,14 @@ namespace NoodleEater.DataEditor
                 _data.FieldCount++;
                 _data.AddField();
             });
-            
-            _drawer.DrawButton("Save", () => {
+
+            _drawer.DrawButton("Save", () =>
+            {
                 Debug.Log("Save");
                 var container = new FieldValueContainer(_data.ClassName, _data.Fields);
                 var json = JsonUtility.ToJson(container);
                 // Disable Cache System
-                // FileHelper.CreateDirectory(Constant.DATACACHE);
-                // FileHelper.CreateFile(Constant.JSONCACHEPATH);
-                // FileHelper.WriteText(Constant.JSONCACHEPATH, json);
-                // Debug.Log(container.ToJson());
+                // Utility.CreateCache(container, json);
                 Debug.Log(json);
                 _generator.CreateJson(container);
                 _generator.GenerateClass(container);
@@ -79,24 +77,12 @@ namespace NoodleEater.DataEditor
         {
             if (field.type == ValueType.Bool)
             {
-                field.value = IntToString(EditorGUILayout.Popup(StringToInt(field.value), _data.BoolData, GUILayout.Width(position.width - 200)));
+                field.value = Utility.IntToString(EditorGUILayout.Popup(Utility.StringToInt(field.value), _data.BoolData, GUILayout.Width(position.width - 200)));
             }
             else
             {
                 field.value = EditorGUILayout.TextField(field.value, GUILayout.Width(position.width - 200));
             }
-        }
-
-        private int StringToInt(string value) {
-            if(string.IsNullOrEmpty(value)) {
-                return 0;
-            } else {
-                return value == "true" ? 1 : 0;
-            }
-        }
-
-        private string IntToString(int value) {
-            return value == 1 ? "true" : "false";
         }
     }
 }
