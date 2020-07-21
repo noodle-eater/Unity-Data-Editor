@@ -1,8 +1,8 @@
-using System.Collections.Generic;
 using System.IO;
 using NoodleEater.DataEditor.Data;
 using NoodleEater.DataEditor.Generator;
 using UnityEditor;
+using UnityEngine;
 
 namespace NoodleEater.DataEditor.Controller {
 
@@ -19,10 +19,12 @@ namespace NoodleEater.DataEditor.Controller {
             FileHelper.CreateDirectory(Constant.GENERATEDDATAPATH);
             FileHelper.CreateFile(jsonPath);
             File.WriteAllText(jsonPath, container.ToJson());
+            Debug.Log($"<color=green>Json file is created in {jsonPath}</color>");
             AssetDatabase.Refresh();
         }
 
         public void GenerateClass(FieldValueContainer container) {
+            Debug.Log($"<color=green>{container.className} class is generated in {Constant.GENERATEDSCRIPTPATH}");
             _classGenerator.GenerateClass(container);
         }
 
